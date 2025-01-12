@@ -1,0 +1,11 @@
+name: stylegan_ada_env
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+    - streamlit
+    - torch
+    - librosa
+    - matplotlib
+    - python-osc
+    - requests
