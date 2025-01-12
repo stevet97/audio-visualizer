@@ -1,60 +1,46 @@
-# 🎶 Real-Time Audio-Reactive AI Visual Generator
+# Audio Visualizer: Real-Time Latent Vectors from Audio to TouchDesigner
+
+This project demonstrates how to **generate real-time visuals** from audio input using machine learning (VAE) and **stream** latent vectors into **TouchDesigner** for powerful, real-time visual output. The system ties together several key technologies—**PyTorch**, **librosa**, **Streamlit**, and the **Open Sound Control (OSC)** protocol—allowing you to map **audio→ML→visual** in a seamless pipeline. 
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Key Technologies](#key-technologies)
+3. [Project Structure](#project-structure)
+4. [Dependencies & Installation](#dependencies--installation)
+5. [How to Run (Windows / macOS)](#how-to-run-windows--macos)
+6. [TouchDesigner Setup](#touchdesigner-setup)
+7. [Under the Hood: ML + Visual Pipeline](#under-the-hood-ml--visual-pipeline)
+8. [FAQs / Troubleshooting](#faqs--troubleshooting)
+
+---
 
 ## Overview
-
-This project leverages **StyleGAN2-ADA** combined with real-time audio analysis to create **stunning, audio-reactive visuals** for DJs, clubs, and live events. Using advanced machine learning techniques and **TouchDesigner** as the front end, the system generates high-quality visuals synchronized to music, offering DJs real-time control over creative parameters like temperature, truncation, and style diversity.
-
----
-
-## Key Features
-
-- **Audio-Reactive Visuals**:
-  - Visuals adapt to the music's BPM, generating new frames on key beats (e.g., every 4th or 8th beat).
-  - Smooth interpolation between frames for continuous and seamless visuals.
-  
-- **StyleGAN2-ADA**:
-  - Generates high-quality, intricate visuals in real time or near real-time.
-  - Optimized for efficient frame generation and audio synchronization.
-
-- **Customizable DJ Dashboard**:
-  - Real-time controls for parameters like temperature, truncation, top-k, and style selection.
-  - BPM synchronization ensures visuals align perfectly with the rhythm.
-
-- **Cloud-Based Processing**:
-  - Uses scalable **AWS EC2 GPU instances** to handle computationally intensive tasks.
-  - Offers a subscription-based model for DJs, reducing upfront hardware costs.
-
-- **TouchDesigner Integration**:
-  - Acts as the real-time rendering engine for live performances.
-  - Adds dynamic effects, transitions, and audio-reactive overlays to StyleGAN outputs.
+- **Goal**: Translate **audio** (via mel-spectrogram + Variational Autoencoder) into **latent vectors**, then stream those vectors to **TouchDesigner** for **real-time** generative visuals.
+- **User Flow**:  
+  1. Double-click a script (`.bat` or `.sh`) to launch a **Streamlit** web app.  
+  2. Open a **TouchDesigner** file (`.toe`), which listens for incoming OSC data.  
+  3. Adjust parameters in the web UI—like how quickly vectors interpolate—while seeing **immediate** feedback in TouchDesigner.  
+- **Highlights**:  
+  - Showcases **machine learning** (VAE) for turning audio data into a compressed latent representation.  
+  - Streams **real-time** numeric data over **OSC**.  
+  - Uses **TouchDesigner** for powerful, GPU-accelerated rendering of the received latent vectors.
 
 ---
 
-## Architecture
-
-1. **Audio Processing**:
-   - **Librosa** extracts tempo, beats, and spectral features from the audio in real time.
-   - Syncs frame generation with the detected BPM for rhythmic visual updates.
-
-2. **Generative AI**:
-   - **VAE (Variational Autoencoder)** processes audio features into latent vectors.
-   - **StyleGAN2-ADA** generates visuals based on these latent vectors, with parameters customizable by the user.
-
-3. **TouchDesigner**:
-   - Receives generated visuals and applies additional effects (e.g., particle systems, 3D transformations).
-   - Acts as the display engine for live events.
-
-4. **Cloud Integration**:
-   - **AWS EC2 with NVIDIA A100 GPUs** handles visual generation.
-   - **Amazon S3** stores pre-generated visuals for quick retrieval.
-   - **AWS IVS** or WebRTC streams visuals in real time to DJs and their audiences.
+## Key Technologies
+1. **[PyTorch](https://pytorch.org/)**  
+   - Used for the **Variational Autoencoder (VAE)**, running on CPU or GPU if available.
+2. **[librosa](https://librosa.org/)**  
+   - For loading audio and computing **mel-spectrograms**.
+3. **[Streamlit](https://streamlit.io/)**  
+   - Provides a **web-based UI** to adjust parameters, run the VAE pipeline, and send data in real time.
+4. **[python-osc](https://pypi.org/project/python-osc/)**  
+   - Sends the latent vectors to **TouchDesigner** using the **OSC** protocol.
+5. **[TouchDesigner](https://derivative.ca/)**  
+   - Receives the incoming vectors, generating or transforming visuals on the fly.
+6. **[Conda / Pip](https://docs.conda.io/)/**  
+   - For environment management and Python dependencies.
 
 ---
 
-## Installation
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/your-repo-name.git
-   cd your-repo-name
-
+## Project Structure
