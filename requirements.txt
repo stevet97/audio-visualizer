@@ -1,0 +1,7 @@
+#conda is often friendlier for installing PyTorch on various platforms.
+streamlit
+torch
+librosa
+matplotlib
+python-osc
+requests
