@@ -44,3 +44,20 @@ This project demonstrates how to **generate real-time visuals** from audio input
 ---
 
 ## Project Structure
+- **`app.py`**: Contains all the Python/Streamlit code to load/process audio, run the VAE, and stream vectors to TouchDesigner.  
+- **`run_app.bat`**: Batch file for **Windows** users—double-click to automatically launch the Streamlit app in the correct environment (if using conda).  
+- **`run_app.sh`**: Shell script for **macOS/Linux**—run `./run_app.sh` in a terminal (after `chmod +x run_app.sh`).  
+- **`environment.yml`** or **`requirements.txt`**: Lists all dependencies needed to run this project.  
+- **`your_touchdesigner_file.toe`**: An optional TouchDesigner project pre-configured with an **OSC In CHOP** on port 7000 (or whichever port you prefer).
+
+---
+
+## Dependencies & Installation
+### Conda Approach
+1. **Install** [Miniconda or Anaconda](https://docs.conda.io/en/latest/miniconda.html).
+2. **Open a terminal** (Windows: “Anaconda Prompt”, macOS: “Terminal”) and navigate to the `my_project` folder.
+3. Create the environment:
+   ```bash
+   conda env create -f environment.yml
+   conda activate stylegan_ada_env
+
