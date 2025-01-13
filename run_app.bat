@@ -1,16 +1,19 @@
 @echo off
-REM ============================================
-REM Batch script for Windows users
-REM ============================================
+echo "Launching Streamlit app with local venv..."
 
-echo "Launching Streamlit app on Windows..."
+REM (1) Create a local venv if none exists:
+if not exist .venv (
+    python -m venv .venv
+)
 
-REM --- If using conda, activate the environment
-conda activate env
-conda activate stylegan_ada_env
+REM (2) Activate the venv:
+call .venv\Scripts\activate
 
-REM --- Run the Streamlit app
-streamlit run app.py
+REM (3) Install requirements:
+pip install --upgrade pip
+pip install -r requirements.txt
 
-REM --- Pause so the window doesn't vanish immediately
+REM (4) Run the app
+python -m streamlit run app.py
+
 pause
