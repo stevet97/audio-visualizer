@@ -1,18 +1,24 @@
 #!/bin/bash
 # ============================================
-# Shell script for macOS or Linux users
+# Shell script to launch Streamlit with conda
 # ============================================
 
-echo "Launching Streamlit app on macOS/Linux..."
+echo "Launching Streamlit app with conda environment..."
 
-# --- If using conda, activate the environment (change the name if needed)
-conda activate
-# If 'conda init' properly set up, this should work.
-# If not, might need 'source /opt/miniconda3/etc/profile.d/conda.sh' first
+# (1) Activate the conda environment
+# Adjust 'stylegan_ada_env' to match your environment name
+# If you haven't run 'conda init' for bash, you may need:
+#   source ~/anaconda3/etc/profile.d/conda.sh
 conda activate stylegan_ada_env
 
-# --- Run the Streamlit app
+# (2) (Optional) install requirements each time
+# Remove these lines if you prefer manual installation
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# (3) Run the Streamlit app
 streamlit run app.py
 
-# Optional: keep the terminal open
-# read -p "Press any key to close..."
+# (4) On macOS/Linux, the script ends here.
+# If you want to force a pause, you can add:
+# read -n 1 -s -r -p "Press any key to close..."
